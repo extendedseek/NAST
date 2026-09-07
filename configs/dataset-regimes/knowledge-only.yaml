@@ -1,0 +1,13 @@
+extends: ../qwen2.5-7b-h100.yaml
+experiment_name: nast-knowledge-only
+train_datasets:
+  - name: scienceqa
+    split: train
+    revision: main
+    weight: 0.50
+  - name: commonsenseqa
+    split: train
+    revision: main
+    weight: 0.50
+training:
+  output_dir: outputs/dataset-regimes/knowledge-only

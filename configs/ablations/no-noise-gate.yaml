@@ -1,0 +1,8 @@
+extends: ../qwen2.5-7b-h100.yaml
+experiment_name: nast-ablation-no-noise-gate
+selector:
+  use_ci: false
+  use_pu: false
+  use_tda: false
+training:
+  output_dir: outputs/ablations/no-noise-gate

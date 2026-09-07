@@ -1,0 +1,6 @@
+extends: ../qwen2.5-7b-h100.yaml
+experiment_name: nast-ablation-full-dense-gradient
+selector:
+  gradient_proxy: full_dense
+training:
+  output_dir: outputs/ablations/full-dense-gradient

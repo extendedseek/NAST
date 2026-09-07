@@ -1,0 +1,7 @@
+extends: ../qwen2.5-7b-h100.yaml
+experiment_name: nast-ablation-gradient-only
+selector:
+  utility_alpha: 0.0
+  utility_beta: 1.0
+training:
+  output_dir: outputs/ablations/gradient-only

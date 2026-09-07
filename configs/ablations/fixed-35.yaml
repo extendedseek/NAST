@@ -1,0 +1,9 @@
+extends: ../qwen2.5-7b-h100.yaml
+experiment_name: nast-ablation-fixed-35
+selector:
+  r_min: 0.35
+  r_max: 0.35
+  entropy_weight: 0.0
+  loss_weight: 0.0
+training:
+  output_dir: outputs/ablations/fixed-35

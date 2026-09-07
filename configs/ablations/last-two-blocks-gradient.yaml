@@ -1,0 +1,6 @@
+extends: ../qwen2.5-7b-h100.yaml
+experiment_name: nast-ablation-last-two-blocks-gradient
+selector:
+  gradient_proxy: last_two_blocks
+training:
+  output_dir: outputs/ablations/last-two-blocks-gradient

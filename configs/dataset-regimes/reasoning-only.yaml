@@ -1,0 +1,13 @@
+extends: ../qwen2.5-7b-h100.yaml
+experiment_name: nast-reasoning-only
+train_datasets:
+  - name: gsm8k
+    split: train
+    revision: main
+    weight: 0.60
+  - name: math
+    split: train
+    revision: main
+    weight: 0.40
+training:
+  output_dir: outputs/dataset-regimes/reasoning-only

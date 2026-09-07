@@ -1,0 +1,5 @@
+extends: ../qwen2.5-7b-h100.yaml
+experiment_name: nast-ablation-loss-only-masking
+training:
+  output_dir: outputs/ablations/loss-only-masking
+  backward_mode: loss_only

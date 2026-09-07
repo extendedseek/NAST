@@ -1,0 +1,6 @@
+extends: ../qwen2.5-7b-h100.yaml
+experiment_name: nast-ablation-output-head-gradient
+selector:
+  gradient_proxy: output_head
+training:
+  output_dir: outputs/ablations/output-head-gradient

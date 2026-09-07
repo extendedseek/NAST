@@ -1,0 +1,6 @@
+extends: ../qwen2.5-7b-h100.yaml
+experiment_name: nast-ablation-no-pu
+selector:
+  use_pu: false
+training:
+  output_dir: outputs/ablations/no-pu

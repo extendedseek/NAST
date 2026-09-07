@@ -1,0 +1,10 @@
+extends: qwen2.5-7b-h100.yaml
+experiment_name: nast-reported-ratio-compat
+selector:
+  # Investigates the convention implied by Table: 53.2% noise + 46.8%
+  # selected. This differs from k_i = ceil(r_i * |C_i|) in the method section.
+  budget_denominator: response
+training:
+  output_dir: outputs/reported-ratio-compat
+tracking:
+  run_name: reported-ratio-compat

@@ -1,0 +1,65 @@
+experiment_name: nast-smoke
+
+model:
+  name_or_path: HuggingFaceTB/SmolLM2-135M-Instruct
+  dtype: float32
+  attention_implementation: eager
+  quantization: none
+  use_chat_template: true
+
+lora:
+  enabled: true
+  rank: 8
+  alpha: 16
+  dropout: 0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+
+selector:
+  ci_lambda: 1.5
+  ci_last_n_layers: 2
+  pu_threshold: 0.05
+  gradient_proxy: output_head
+  utility_alpha: 0.4
+  utility_beta: 0.6
+  r_min: 0.15
+  r_max: 0.50
+  entropy_weight: 0.20
+  loss_weight: 0.15
+  budget_denominator: candidate
+  tda_representation: embedding
+
+training:
+  output_dir: outputs/smoke
+  seed: 42
+  max_sequence_length: 256
+  per_device_batch_size: 1
+  gradient_accumulation_steps: 1
+  epochs: 1.0
+  max_steps: 2
+  learning_rate: 0.0002
+  mixed_precision: "no"
+  gradient_checkpointing: false
+  backward_mode: detach
+  log_every: 1
+  save_every: 10
+  prototype_max_samples: 5
+  profile_warmup_steps: 1
+  profile_active_steps: 2
+
+train_datasets:
+  - name: examples/toy_train.jsonl
+    split: train
+    weight: 1.0
+
+evaluation:
+  per_device_batch_size: 1
+  max_samples: 2
+  max_new_tokens: 64
+  output_file: results/smoke_evaluation.json
+  datasets:
+    - name: examples/toy_eval.jsonl
+      split: train
+
+tracking:
+  report_to: none
+  run_name: nast-smoke

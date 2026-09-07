@@ -1,0 +1,7 @@
+extends: ../qwen2.5-7b-h100.yaml
+experiment_name: nast-ablation-random-selection
+selector:
+  ranking_strategy: random
+  random_seed: 42
+training:
+  output_dir: outputs/ablations/random-selection

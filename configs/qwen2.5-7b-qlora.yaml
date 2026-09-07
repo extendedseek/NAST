@@ -1,0 +1,8 @@
+extends: qwen2.5-7b-h100.yaml
+experiment_name: nast-qwen2.5-7b-qlora
+model:
+  quantization: 4bit
+training:
+  output_dir: outputs/qwen2.5-7b-qlora
+tracking:
+  run_name: qwen2.5-7b-qlora

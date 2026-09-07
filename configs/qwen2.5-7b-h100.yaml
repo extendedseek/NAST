@@ -1,0 +1,139 @@
+experiment_name: nast-qwen2.5-7b-h100
+
+# The manuscript does not state its backbone. Qwen2.5-7B-Instruct is a public,
+# auditable default and is not asserted to be the unpublished original model.
+model:
+  name_or_path: Qwen/Qwen2.5-7B-Instruct
+  revision: main
+  trust_remote_code: false
+  dtype: bfloat16
+  attention_implementation: eager
+  quantization: none
+  use_chat_template: true
+
+lora:
+  enabled: true
+  rank: 16
+  alpha: 32
+  dropout: 0.05
+  bias: none
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+
+selector:
+  enabled: true
+  use_ci: true
+  use_pu: true
+  use_tda: true
+  ci_lambda: 1.5
+  ci_last_n_layers: 4
+  ci_position_normalize: true
+  pu_threshold: 0.05
+  pu_transform: one_minus_p
+  tda_classes: 3
+  tda_bins: 64
+  tda_small_sample_quantile: 0.25
+  tda_representation: embedding
+  utility_alpha: 0.4
+  utility_beta: 0.6
+  gradient_proxy: last_block
+  r_min: 0.15
+  r_max: 0.50
+  entropy_weight: 0.20
+  loss_weight: 0.15
+  budget_denominator: candidate
+  min_selected_tokens: 1
+  min_candidate_tokens: 1
+  exclude_punctuation_only: false
+
+training:
+  output_dir: outputs/qwen2.5-7b-h100
+  seed: 42
+  max_sequence_length: 2048
+  per_device_batch_size: 1
+  gradient_accumulation_steps: 32
+  epochs: 1.0
+  max_steps: -1
+  learning_rate: 0.00002
+  weight_decay: 0.01
+  warmup_ratio: 0.03
+  max_grad_norm: 1.0
+  mixed_precision: bf16
+  gradient_checkpointing: true
+  backward_mode: detach
+  log_every: 1
+  save_every: 500
+  keep_last_checkpoints: 2
+  num_workers: 4
+  prototype_max_samples: 4096
+  profile_warmup_steps: 3
+  profile_active_steps: 10
+
+train_datasets:
+  - name: open_platypus
+    split: "train[:-1000]"
+    revision: main
+    weight: 0.25
+  - name: dolly_15k
+    split: "train[:-1000]"
+    revision: main
+    weight: 0.15
+  - name: oasst1
+    split: train
+    revision: main
+    language: en
+    weight: 0.15
+  - name: gsm8k
+    split: train
+    revision: main
+    weight: 0.15
+  - name: math
+    split: train
+    revision: main
+    weight: 0.10
+  - name: scienceqa
+    split: train
+    revision: main
+    weight: 0.10
+  - name: commonsenseqa
+    split: train
+    revision: main
+    weight: 0.10
+
+evaluation:
+  per_device_batch_size: 1
+  max_samples: null
+  max_new_tokens: 512
+  temperature: 0.0
+  output_file: results/qwen2.5-7b-h100-evaluation.json
+  datasets:
+    - name: open_platypus
+      split: "train[-1000:]"
+      revision: main
+    - name: dolly_15k
+      split: "train[-1000:]"
+      revision: main
+    - name: oasst1
+      split: validation
+      revision: main
+      language: en
+    - name: gsm8k
+      split: test
+      revision: main
+    - name: math
+      split: test
+      revision: main
+    - name: scienceqa
+      split: test
+      revision: main
+    - name: commonsenseqa
+      split: validation
+      revision: main
+    - name: mmlu
+      config: all
+      split: test
+      revision: main
+
+tracking:
+  report_to: none
+  project: nast
+  run_name: qwen2.5-7b-h100

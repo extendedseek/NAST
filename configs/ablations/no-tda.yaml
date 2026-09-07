@@ -1,0 +1,6 @@
+extends: ../qwen2.5-7b-h100.yaml
+experiment_name: nast-ablation-no-tda
+selector:
+  use_tda: false
+training:
+  output_dir: outputs/ablations/no-tda

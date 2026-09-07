@@ -1,0 +1,45 @@
+# Replace `main` with immutable commit hashes before an archival release.
+datasets:
+  - key: open_platypus
+    hub_id: garage-bAInd/Open-Platypus
+    revision: main
+    url: https://huggingface.co/datasets/garage-bAInd/Open-Platypus
+  - key: dolly_15k
+    hub_id: databricks/databricks-dolly-15k
+    revision: main
+    license: cc-by-sa-3.0
+    url: https://huggingface.co/datasets/databricks/databricks-dolly-15k
+  - key: oasst1
+    hub_id: OpenAssistant/oasst1
+    revision: main
+    license: apache-2.0
+    url: https://huggingface.co/datasets/OpenAssistant/oasst1
+  - key: gsm8k
+    hub_id: openai/gsm8k
+    config: main
+    revision: main
+    license: mit
+    url: https://huggingface.co/datasets/openai/gsm8k
+  - key: math
+    hub_id: DigitalLearningGmbH/MATH-lighteval
+    revision: main
+    license: mit
+    url: https://huggingface.co/datasets/DigitalLearningGmbH/MATH-lighteval
+  - key: scienceqa
+    hub_id: derek-thomas/ScienceQA
+    revision: main
+    license: cc-by-nc-sa-4.0
+    license_note: Verify the mirror metadata against the official ScienceQA terms before use.
+    url: https://huggingface.co/datasets/derek-thomas/ScienceQA
+  - key: commonsenseqa
+    hub_id: tau/commonsense_qa
+    revision: main
+    license: mit
+    url: https://huggingface.co/datasets/tau/commonsense_qa
+  - key: mmlu
+    hub_id: cais/mmlu
+    config: all
+    revision: main
+    license: mit
+    role: evaluation-only
+    url: https://huggingface.co/datasets/cais/mmlu

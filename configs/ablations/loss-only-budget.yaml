@@ -1,0 +1,7 @@
+extends: ../qwen2.5-7b-h100.yaml
+experiment_name: nast-ablation-loss-only-budget
+selector:
+  entropy_weight: 0.0
+  loss_weight: 0.15
+training:
+  output_dir: outputs/ablations/loss-only-budget

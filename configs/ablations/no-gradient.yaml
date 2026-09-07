@@ -1,0 +1,8 @@
+extends: ../qwen2.5-7b-h100.yaml
+experiment_name: nast-ablation-no-gradient
+selector:
+  utility_alpha: 1.0
+  utility_beta: 0.0
+  gradient_proxy: none
+training:
+  output_dir: outputs/ablations/no-gradient

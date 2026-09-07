@@ -1,0 +1,9 @@
+extends: ../qwen2.5-7b-h100.yaml
+experiment_name: baseline-full-token-lora
+selector:
+  enabled: false
+training:
+  output_dir: outputs/baselines/full-token-lora
+  backward_mode: loss_only
+tracking:
+  run_name: baseline-full-token-lora
